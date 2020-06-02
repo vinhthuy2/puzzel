@@ -3,28 +3,29 @@ let holeIndex = 11;
 const neigbourTiles = [];
 const panelElement = document.querySelector('#panel');
 
-const percentageX = 100 / (gridSize[0] - 1)
-const percentageY = 100 / (gridSize[1] - 1)
+const percentageX = 100 / (gridSize[0] - 1);
+const percentageY = 100 / (gridSize[1] - 1);
 
-function addPieces(){
-    for (let index = 0; index < gridSize[0]*gridSize[1]; index++) {
-        const li = document.createElement('li');
-        li.id = index;
-        if (gridSize[0]*gridSize[1] - 1 !== index) {
-            const xPos = percentageX * (index % gridSize[0]);
-            const yPos = percentageY * (Math.floor(index/gridSize[0]));
-            li.style.backgroundImage = 'url("penguins_300x400.jpg")';
-            li.style.backgroundPosition = `${xPos}% ${yPos}%`;
-        }
-        panelElement.appendChild(li);
+function addPieces() {
+  for (let index = 0; index < gridSize[0] * gridSize[1]; index++) {
+    const li = document.createElement('li');
+    li.id = index;
+    if (gridSize[0] * gridSize[1] - 1 !== index) {
+      const xPos = percentageX * (index % gridSize[0]);
+      const yPos = percentageY * Math.floor(index / gridSize[0]);
+      li.style.backgroundImage = 'url("penguins_300x400.jpg")';
+      li.style.backgroundPosition = `${xPos}% ${yPos}%`;
     }
+    li.classList.add('tile');
+    panelElement.appendChild(li);
+  }
 }
 
-function suffeTiles(){
-    for (let i = panelElement.children.length - 1; i >= 0; i--) {
-        panelElement.appendChild(panelElement.children[Math.random() * i | 0]);
-    }
-    panelElement.children[panelElement.children.length-1].className = 'hole';
+function suffeTiles() {
+  for (let i = panelElement.children.length - 1; i >= 0; i--) {
+    panelElement.appendChild(panelElement.children[(Math.random() * i) | 0]);
+  }
+  panelElement.children[panelElement.children.length - 1].classList.add('hole');
 }
 
 function findNeigbourTilesIndex(index) {
@@ -101,5 +102,5 @@ document.addEventListener('keydown', (ev) => {
   }
 });
 
-addPieces()
-suffeTiles()
+addPieces();
+suffeTiles();

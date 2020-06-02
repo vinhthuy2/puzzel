@@ -5,6 +5,13 @@
     height: 100%;
 }
 
+#sample{
+    background-image: url('penguins_300x400.jpg');
+    width: 300px;
+    height: 400px;
+    margin-right: 100px;
+}
+
 #panel {
     width: 300px;
     display: inline-block;
@@ -12,7 +19,7 @@
     padding: 0;
 }
 
-#panel li {
+.tile {
     box-sizing: border-box;
     float: left;
     width: 100px;
@@ -24,7 +31,7 @@
     justify-content: center;
 }
 
-#panel li.hole {
+.tile.hole {
     background-color: rgb(130, 62, 139);
     filter: brightness(50%);
 }
