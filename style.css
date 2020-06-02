@@ -1,0 +1,35 @@
+#container {
+    justify-content: center;
+    display: flex;
+}
+
+#panel {
+    width: 300px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+#panel li {
+    box-sizing: border-box;
+    float: left;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#panel li.hole {
+    background-color: white;
+    filter: brightness(50%);
+}
+
+body {
+    height: 100vh;
+    background-color: burlywood;
+    margin: 0;
+    padding: 0;
+}
