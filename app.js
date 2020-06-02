@@ -23,21 +23,24 @@ function addPieces() {
 
 function suffeTiles() {
   for (let i = panelElement.children.length - 1; i >= 0; i--) {
-    panelElement.appendChild(panelElement.children[(Math.random() * i) | 0]);
+    const element = panelElement.children[(Math.random() * i) | 0];
+    element.id = panelElement.children.length - 1 - i;
+    panelElement.appendChild(element);
   }
   panelElement.children[panelElement.children.length - 1].classList.add('hole');
 }
 
 function findNeigbourTilesIndex(index) {
+  const valIdx = parseInt(index);
   return {
-    left: index - 1,
-    right: index + 1,
-    up: index - gridSize[0],
-    down: index + gridSize[0]
+    left: valIdx - 1,
+    right: valIdx + 1,
+    up: valIdx - gridSize[0],
+    down: valIdx + gridSize[0]
   };
 }
 
-function validateNeigbourIndex(nextIndex, curIdx) {
+function validateSwap(nextIndex, curIdx) {
   if (
     nextIndex >= gridSize[0] * gridSize[1] ||
     nextIndex < 0 ||
@@ -52,6 +55,9 @@ function validateNeigbourIndex(nextIndex, curIdx) {
 function swapElements(idx1, idx2) {
   const obj1 = panelElement.children[idx1];
   const obj2 = panelElement.children[idx2];
+  const temp = obj2.id;
+  obj2.id = obj1.id;
+  obj1.id = temp;
   // save the location of obj2
   let parent2 = obj2.parentNode;
   let next2 = obj2.nextSibling;
@@ -72,6 +78,29 @@ function swapElements(idx1, idx2) {
       parent2.appendChild(obj1);
     }
   }
+}
+
+function tileClickHandler(ev) {
+  debugger
+  const targetId = ev.target.id;
+  const neigbourIndexObj = findNeigbourTilesIndex(holeIndex);
+  const isNeigbour = !!Object.values(neigbourIndexObj).filter(v=> v == targetId).length;
+  console.log(neigbourIndexObj, targetId);
+  
+  if (isNeigbour) {
+    if (validateSwap(targetId, holeIndex)) {
+      swapElements(holeIndex, targetId);
+      holeIndex = targetId;
+    } 
+  }
+}
+
+function tileClickEventBinding(){
+  document.querySelectorAll(".tile").forEach(li=>{
+    if (li.id !== holeIndex) {
+      li.addEventListener('click', tileClickHandler)
+    }
+  })
 }
 
 document.addEventListener('keydown', (ev) => {
@@ -96,7 +125,7 @@ document.addEventListener('keydown', (ev) => {
     default:
       return;
   }
-  if (validateNeigbourIndex(targetIndex, holeIndex)) {
+  if (validateSwap(targetIndex, holeIndex)) {
     swapElements(holeIndex, targetIndex);
     holeIndex = targetIndex;
   }
@@ -104,3 +133,4 @@ document.addEventListener('keydown', (ev) => {
 
 addPieces();
 suffeTiles();
+tileClickEventBinding();
