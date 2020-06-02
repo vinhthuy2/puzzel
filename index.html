@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Puzzel</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <title>Puzzel</title>
-    <link rel="stylesheet"
-          href="style.css">
-</head>
-
-<body>
-    <ul>
-        <li>Tap on tiles nearby the blank to move</li>
-        <li>Use arrow keys to move the nearby tiles</li>
-    </ul>
-    <div id="container">
-        <div id="sample"></div>
-        <ul id="panel">
-        </ul>
-    </div>
-    <script src="app.js"></script>
-</body>
-
+    <body>
+        <div id="container">
+            <div id="instruction">
+                <ul>
+                    <li id="icon"></li>
+                    <li>Tap on tiles nearby the blank to move</li>
+                    <li>Use arrow keys to move the nearby tiles</li>
+                </ul>
+            </div>
+            <div id="game">
+                <div id="sample"></div>
+                <ul id="panel"></ul>
+            </div>
+        </div>
+        <script src="app.js"></script>
+    </body>
 </html>
