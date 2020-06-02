@@ -121,10 +121,14 @@ body {
     }
     #container {
         width: 300px;
-        font-size: 13px;
+        font-size: 12px;
     }
     #game {
         justify-content: center;
+    }
+    #icon {
+        width: 24px;
+        height: 24px;
     }
 }
 
